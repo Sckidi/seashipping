@@ -1,0 +1,29 @@
+.jumbotron-fluid{
+    background-color: white;
+}
+.issue{
+    background-color: rgb(255,183,0);
+    border: 0;
+    height: 150px;
+    font-size: xx-large;
+}
+.issue:hover {background-color: rgb(214,129,0)}
+
+.center {
+    margin: auto;
+    padding-top: 250px;
+}
+.order{
+    padding-top: 75px;
+}
+
+.a{
+    text-decoration: none;
+}
+div > a:hover{
+    text-decoration: none;
+}
+
+.reg{
+    padding-top: 75px;
+}

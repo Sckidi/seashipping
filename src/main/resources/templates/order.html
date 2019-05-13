@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <meta charset="UTF-8">
+    <title>Order</title>
+</head>
+<body>
+<div class="container">
+    <nav class="nav nav-pills nav-fill">
+        <a class="nav-item nav-link active" href="/home">Главная</a>
+        <a class="nav-item nav-link" th:href="@{/logout}" tabindex="-1" aria-disabled="true">Выход</a>
+    </nav>
+    <form class="order">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="inputState">Товар</label>
+                <select id="inputState" class="form-control">
+                    <option selected>Choose...</option>
+                    <option>...</option>
+                </select>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputAmount">Количество</label>
+                <input type="text" class="form-control" id="inputAmount" placeholder="Количество">
+            </div>
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-startDate">Срок доставки</span>
+            </div>
+            <input type="date" class="form-control" required name="startDate"
+                   id="startDate" aria-describedby="inputGroup-sizing-startDate">
+        </div>
+        <h5>Информация о заказчике</h5>
+        <div class="form-group">
+            <label for="name">Название:</label>
+            <input type="text" class="form-control" id="name" />
+        </div>
+        <div class="form-group">
+            <label for="address">Адрес:</label>
+            <input type="text" class="form-control" id="address" />
+        </div>
+        <div class="form-group">
+            <label for="phone">Телефон:</label>
+            <input type="text" class="form-control" id="phone" />
+        </div>
+        <div class="form-group">
+            <label for="contact">Контактное лицо:</label>
+            <input type="text" class="form-control" id="contact" />
+        </div>
+        <h5>Итоговая сумма заказа:</h5>
+        <div class="form-group">
+            <input type="text" class="form-control" id="sum" readonly="readonly"/>
+        </div>
+        <button type="submit" class="btn btn-primary">Оформить</button>
+
+    </form>
+</div>
+<script th:src="@{/js/jquery.min.js}" type="text/javascript"></script>
+<script th:src="@{/js/jquery-ui.min.js}" type="text/javascript"></script>
+<script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js}"></script>
+<script th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.css}"></script>
+</body>
+</html>
