@@ -12,50 +12,77 @@
         <a class="nav-item nav-link active" href="/home">Главная</a>
         <a class="nav-item nav-link" th:href="@{/logout}" tabindex="-1" aria-disabled="true">Выход</a>
     </nav>
-    <form class="order">
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="inputState">Товар</label>
-                <select id="inputState" class="form-control">
-                    <option selected>Choose...</option>
-                    <option>...</option>
+    <form role="form" th:object="${form}" th:action="@{/order}" method="post" class="order form-horizontal">
+        <div th:if="${addedSuccessful}" id="addedSuccessful">
+            <div class="alert alert-success">
+                Ваш заказ добавлен!
+            </div>
+        </div>
+        <h5>Информация о заказe</h5>
+        <div class="form-row mb-3">
+            <div class="input-group col-md-6">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-inputState">Товар</span>
+                </div>
+                <select class="form-control" required name="product"
+                        id="inputState" aria-describedby="inputGroup-sizing-inputState">
+                    <option th:each="product : ${products}"
+                            th:value="${product}"
+                            th:text="${product.getName()}+' | Поставщик: '+${product.getManufacturer()}+' | Срок хранения: ' +${product.getShelfLife()}">
+                    </option>
                 </select>
             </div>
-            <div class="form-group col-md-6">
-                <label for="inputAmount">Количество</label>
-                <input type="text" class="form-control" id="inputAmount" placeholder="Количество">
+            <div class="input-group col-md-6">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-consignmentAmount">Количество</span>
+                </div>
+                <input type="number" class="form-control" required name="consignmentAmount"
+                       id="consignmentAmount" aria-describedby="inputGroup-sizing-consignmentAmount"/>
             </div>
+        </div>
+        <div class="form-row mb-3">
+            <div class="input-group col-md-6">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-consignmentShippingDate">Срок доставки</span>
+                </div>
+                <input type="date" class="form-control" required name="consignmentShippingDate"
+                       id="consignmentShippingDate" aria-describedby="inputGroup-sizing-consignmentShippingDate">
+            </div>
+            <div class="input-group col-md-6">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-consignmentShippingPlace">Место доставки</span>
+                </div>
+                <input type="text" class="form-control" required name="consignmentShippingPlace" id="consignmentShippingPlace"/>
+            </div>
+        </div>
+
+
+        <h5>Информация о заказчике</h5>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-name">Название</span>
+            </div>
+            <input type="text" class="form-control" required id="name"/>
         </div>
         <div class="input-group mb-3">
             <div class="input-group-prepend">
-        <span class="input-group-text" id="inputGroup-sizing-startDate">Срок доставки</span>
+                <span class="input-group-text" id="inputGroup-sizing-address">Адрес</span>
             </div>
-            <input type="date" class="form-control" required name="startDate"
-                   id="startDate" aria-describedby="inputGroup-sizing-startDate">
+            <input type="text" class="form-control" required id="address"/>
         </div>
-        <h5>Информация о заказчике</h5>
-        <div class="form-group">
-            <label for="name">Название:</label>
-            <input type="text" class="form-control" id="name" />
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-phone">Телефон</span>
+            </div>
+            <input type="tel" class="form-control" required id="phone"/>
         </div>
-        <div class="form-group">
-            <label for="address">Адрес:</label>
-            <input type="text" class="form-control" id="address" />
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-contact">Контактное лицо</span>
+            </div>
+            <input type="text" class="form-control"  required id="contact"/>
         </div>
-        <div class="form-group">
-            <label for="phone">Телефон:</label>
-            <input type="text" class="form-control" id="phone" />
-        </div>
-        <div class="form-group">
-            <label for="contact">Контактное лицо:</label>
-            <input type="text" class="form-control" id="contact" />
-        </div>
-        <h5>Итоговая сумма заказа:</h5>
-        <div class="form-group">
-            <input type="text" class="form-control" id="sum" readonly="readonly"/>
-        </div>
-        <button type="submit" class="btn btn-primary">Оформить</button>
-
+        <input type="submit" id="registerButton" class="btn btn-primary"  value="Оформить">
     </form>
 </div>
 <script th:src="@{/js/jquery.min.js}" type="text/javascript"></script>

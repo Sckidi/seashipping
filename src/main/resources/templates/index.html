@@ -12,8 +12,8 @@
         <a class="nav-item nav-link active" href="#">Главная</a>
         <a class="nav-item nav-link" th:href="@{/logout}" tabindex="-1" aria-disabled="true">Выход</a>
     </nav>
-    <div class="jumbotron jumbotron-fluid">
     <div class="container center">
+        <div th:if="${currentUser}"><h1 style="text-align: center" th:text="'Приветстуем Вас, '+${currentUser.getUsername()}"></h1></div>
         <div class="row">
             <div class="col">
                 <a href="/order"> <button type="button" class="btn btn-primary btn-lg btn-block issue">Оформить заказ</button></a>
@@ -22,7 +22,6 @@
                 <a href="/list"><button type="button" class="btn btn-primary btn-lg btn-block issue">Мои заказы</button></a>
             </div>
         </div>
-    </div>
     </div>
 </div>
 
