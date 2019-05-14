@@ -15,7 +15,15 @@ public class OrderForm {
     private String customerAddress;
     private String customerPhoneNumber;
     private String customerContactPerson;
-    private String registrationNumber;
+    private String customerRegistrationNumber;
+
+    public String getCustomerRegistrationNumber() {
+        return customerRegistrationNumber;
+    }
+
+    public void setCustomerRegistrationNumber(String aCustomerRegistrationNumber) {
+        customerRegistrationNumber = aCustomerRegistrationNumber;
+    }
 
     public Products getProduct() {
         return product;
@@ -79,13 +87,5 @@ public class OrderForm {
 
     public void setCustomerContactPerson(String customerContactPerson) {
         this.customerContactPerson = customerContactPerson;
-    }
-
-    public String getRegistrationNumber() {
-        return registrationNumber;
-    }
-
-    public void setRegistrationNumber(String registrationNumber) {
-        this.registrationNumber = registrationNumber;
     }
 }

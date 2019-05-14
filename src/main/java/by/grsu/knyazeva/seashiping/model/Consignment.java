@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 //Заказ
@@ -22,6 +23,8 @@ public class Consignment implements Serializable {
     private Compartment compartment;
     private String registrationNumber;
     private boolean  paid;
+    @OneToMany(mappedBy="consignment")
+    private List<Order> orders;
 
 
     public Long getId() {
@@ -86,5 +89,13 @@ public class Consignment implements Serializable {
 
     public void setPaid(boolean paid) {
         this.paid = paid;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> aOrders) {
+        orders = aOrders;
     }
 }

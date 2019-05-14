@@ -1,9 +1,12 @@
 package by.grsu.knyazeva.seashiping.model;
 
 
-import javax.persistence.*;
-import java.util.Collection;
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
 @Table(name = "USER", schema = "public", uniqueConstraints = {
@@ -18,8 +21,6 @@ public class User {
     private String username;
     private String password;
     private String organization;
-    @OneToMany(mappedBy = "customer",  cascade = CascadeType.ALL)
-    private List<Order> orders;
 
     public Long getId() {
         return id;
@@ -53,11 +54,4 @@ public class User {
         this.organization = organization;
     }
 
-    public List<Order> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
-    }
 }

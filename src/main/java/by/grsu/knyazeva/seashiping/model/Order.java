@@ -6,107 +6,46 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-@Entity
+@Entity(name = "_order")
 public class Order implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String address;
-    private String companyName;
-    private String contactPerson;
-    private String phoneNumber;
-    private String registrationNumber;
-    private String username;
-    private Long amount;
-    private Products product;
-    private LocalDate shippingDate;
-    private String shippingPlace;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
+  @ManyToOne
+  @JoinColumn(name = "customer_id", nullable = false)
+  private Customer customer;
+  @ManyToOne
+  @JoinColumn(name = "consignment_id", nullable = false)
+  private Consignment consignment;
 
-    public Long getId() {
-        return id;
-    }
+  public Long getId() {
+    return id;
+  }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-    public String getAddress() {
-        return address;
-    }
+  public Customer getCustomer() {
+    return customer;
+  }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
+  public void setCustomer(Customer aCustomer) {
+    customer = aCustomer;
+  }
 
-    public String getCompanyName() {
-        return companyName;
-    }
+  public Consignment getConsignment() {
+    return consignment;
+  }
 
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
+  public void setConsignment(Consignment aConsignment) {
+    consignment = aConsignment;
+  }
 
-    public String getContactPerson() {
-        return contactPerson;
-    }
-
-    public void setContactPerson(String contactPerson) {
-        this.contactPerson = contactPerson;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getRegistrationNumber() {
-        return registrationNumber;
-    }
-
-    public void setRegistrationNumber(String registrationNumber) {
-        this.registrationNumber = registrationNumber;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public Long getAmount() {
-        return amount;
-    }
-
-    public void setAmount(Long amount) {
-        this.amount = amount;
-    }
-
-    public Products getProduct() {
-        return product;
-    }
-
-    public void setProduct(Products product) {
-        this.product = product;
-    }
-
-    public LocalDate getShippingDate() {
-        return shippingDate;
-    }
-
-    public void setShippingDate(LocalDate shippingDate) {
-        this.shippingDate = shippingDate;
-    }
-
-    public String getShippingPlace() {
-        return shippingPlace;
-    }
-
-    public void setShippingPlace(String shippingPlace) {
-        this.shippingPlace = shippingPlace;
-    }
+  @Override
+  public String toString() {
+    return "Заказ № " + id +
+      ", Заказчик: " + customer.getCompanyName() +
+      ", Партия № " + consignment.getId();
+  }
 }

@@ -47,16 +47,25 @@ public class OrderController {
     public String addOrder(@ModelAttribute("form") OrderForm orderForm, Model model) {
 
         Order order = new Order();
-        order.setAddress(orderForm.getCustomerAddress());
-        order.setCompanyName(orderForm.getCustomerCompanyName());
-        order.setContactPerson(orderForm.getCustomerContactPerson());
-        order.setPhoneNumber(orderForm.getCustomerPhoneNumber());
-        order.setRegistrationNumber(orderForm.getRegistrationNumber());
-        order.setUsername(getCurrentUser().getUsername());
-        order.setAmount(orderForm.getConsignmentAmount());
-        order.setProduct(orderForm.getProduct());
-        order.setShippingDate(orderForm.getConsignmentShippingDate());
-        order.setShippingPlace(orderForm.getConsignmentShippingPlace());
+        Customer customer = customerRepository.findByRegistrationNumber(orderForm.getCustomerRegistrationNumber());
+        if(customer == null){
+            customer = new Customer();
+            customer.setAddress(orderForm.getCustomerAddress());
+            customer.setCompanyName(orderForm.getCustomerCompanyName());
+            customer.setContactPerson(orderForm.getCustomerContactPerson());
+            customer.setRegistrationNumber(orderForm.getCustomerRegistrationNumber());
+            customer.setUsername(getCurrentUser().getUsername());
+            customer.setPhoneNumber(orderForm.getCustomerPhoneNumber());
+            customerRepository.save(customer);
+        }
+        Consignment consignment = new Consignment();
+        consignment.setAmount(orderForm.getConsignmentAmount());
+        consignment.setProduct(orderForm.getProduct());
+        consignment.setShippingDate(orderForm.getConsignmentShippingDate());
+        consignment.setShippingPlace(orderForm.getConsignmentShippingPlace());
+        consignmentRepository.save(consignment);
+        order.setConsignment(consignment);
+        order.setCustomer(customer);
         orderRepository.save(order);
         model.addAttribute("addedSuccessful", true);
         return "order";
